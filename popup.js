@@ -1,20 +1,24 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-'use strict';
-
-let changeColor = document.getElementById('changeColor');
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
-
-changeColor.onclick = function(element) {
-  let color = element.target.value;
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
+(function(){
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log(123)
+    document.querySelector('#paste').addEventListener(
+        'click', pasteSelection);
   });
-};
+  //$('#paste').click(function(){pasteSelection();});
+})();
+
+
+function pasteSelection() {
+  chrome.tabs.query({active: true, windowId: chrome.windows.WINDOW_ID_CURRENT}, function(tabs) {
+      //tabs.map(tab => {
+        var text = document.getElementById('text'); 
+        chrome.tabs.sendMessage(tabs[0].id, { action: "response" }, function(response){
+          
+        text.innerHTML = text.innerHTML + tabs[0].url + '\n';
+        text.innerHTML = text.innerHTML + tabs[0].title + '\n';
+         //alert('The response is : ' + response.data);
+          text.innerHTML = text.innerHTML + response.data;
+      });
+      //})
+  });
+}
