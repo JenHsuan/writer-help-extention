@@ -11,11 +11,17 @@
   ],
   "permissions": [
     "tabs",
-    "<all_urls>"
+    "<all_urls>",
+    "contextMenus",
+    "storage"
   ],
   "browser_action": {
     "default_title": "Selected Text",
     "default_popup": "popup.html"
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "background": {  
+    "scripts": ["background.js"],  
+    "persistent": true 
+  }  
 }
