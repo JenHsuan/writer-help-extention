@@ -1,12 +1,49 @@
 (function(){
+  chrome.storage.sync.get("title",function(items) {
+    var text = document.getElementById('text'); 
+    text.innerHTML = "";
+    text.innerHTML = text.innerHTML + "Title:\n";
+    text.innerHTML = text.innerHTML + `${items.title}\n`;
+  });
+  chrome.storage.sync.get("content",function(items) {
+    var text = document.getElementById('text'); 
+    text.innerHTML = text.innerHTML + `\n`;
+    text.innerHTML = text.innerHTML + `Selected content:\n`;
+    text.innerHTML = text.innerHTML + `${items.content}\n`;
+  });
   document.addEventListener('DOMContentLoaded', function() {
-    console.log(123)
-    document.querySelector('#paste').addEventListener(
-        'click', pasteSelection);
+    document.querySelector('#copy').addEventListener(
+      'click', copy);
+    document.querySelector('#clear').addEventListener(
+      'click', clear);
   });
   //$('#paste').click(function(){pasteSelection();});
 })();
 
+function clear() {
+  chrome.storage.sync.clear(function() {
+    var error = chrome.runtime.lastError;
+    if (error) {
+        alert.error(error);
+    } else {
+        text.innerHTML = "";
+    }
+  });
+}
+
+function copy() {
+  var copyText = document.getElementById("text");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
 
 function pasteSelection() {
   chrome.tabs.query({active: true, windowId: chrome.windows.WINDOW_ID_CURRENT}, function(tabs) {

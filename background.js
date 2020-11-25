@@ -2,19 +2,18 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 function genericOnClick(info, tab) {
+    /*
     let data = "ID是：" + info.menuItemId + "\n" +  
     "現在的網址是：" + info.pageUrl + "\n" +  
     "選取的文字是：" + (info.selectionText ? info.selectionText : "") + "\n" +  
     "現在hover元素的圖片來源：" + (info.srcUrl ? info.srcUrl : "") + "\n" +  
     "現在hover的連結：" + (info.linkUrl ? info.linkUrl : "") + "\n" +  
-    "現在hover的frame是：" + (info.frameUrl ? info.frameUrl : "") + "\n";
+    "現在hover的frame是：" + (info.frameUrl ? info.frameUrl : "") + "\n" +
+    "tab: " + JSON.stringify(tab);
+    */
 
-    chrome.storage.sync.set({"color":data},function() {
-        //string or array of string or object keys
-        chrome.storage.sync.get("color",function(items) {
-            alert(items.color);
-        });
-    });
+   chrome.storage.sync.set({"title":tab.title},function() {});
+   chrome.storage.sync.set({"content":info.selectionText},function() {});
 };
 
 chrome.runtime.onInstalled.addListener(function() {
