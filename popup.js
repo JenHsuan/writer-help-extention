@@ -1,6 +1,7 @@
+
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#clear').addEventListener('click', clear);
-    
+  
   let main = document.getElementById('main');
   chrome.storage.sync.get("test9",function(items) {
   let data = items['test9'];
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let contentDate = document.createElement('div');
         contentDate.className = 'contentDate'
         contentDate.setAttribute("id", `${id}-date`);
-        contentDate.innerHTML = eleContent.date ;
+        contentDate.innerHTML = eleContent.type ;
 
         let content = null;
         if (eleContent.type === 'code') {
@@ -76,6 +77,30 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+  //How much capacities the user use
+  let usedCapacity = document.getElementById('usedCapacity');
+  chrome.storage.sync.getBytesInUse("test9", function(bytes){
+    if (bytes >= 1024) {
+      usedCapacity.innerHTML = `You have used ${(bytes/1024).toFixed(2)} KB`;
+    } else if (bytes >= 1048576) {
+      usedCapacity.innerHTML = `You have used ${(bytes/1048576).toFixed(2)} MB`;
+    } else {
+      usedCapacity.innerHTML = `You have used ${bytes} Bytes`;
+    }
+  });
+
+  //button event
+  /*
+  let markdown = document.getElementById('markdown');
+  markdown.onclick = function() {
+    openTab('markdown');
+  }
+
+  let notes = document.getElementById('notes');
+  notes.onclick = function() {
+    openTab('notes');
+  }
+  */
 });
 /*
 alayman-writer: [
@@ -88,6 +113,12 @@ alayman-writer: [
             url:[]
         }
     ]
+
+quicknote: 
+
+setting: {
+  seletedTab:
+}
  */
 
 function controlContent(id) {
@@ -164,7 +195,7 @@ function clear() {
   x.className = "show";
   x.innerHTML = `Remove all...`;
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  chrome.storage.sync.clear(function() {
+  chrome.storage.sync.remove("test9",function() {
     var error = chrome.runtime.lastError;
     if (error) {
         alert.error(error);
@@ -233,4 +264,12 @@ function pasteSelection() {
       });
       //})
   });
+}
+
+function openTab(tabName) {
+  let x = document.getElementsByClassName("tab");
+  for (let i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  document.getElementById(tabName).style.display = "block";  
 }

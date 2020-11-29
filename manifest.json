@@ -11,13 +11,18 @@
   ],
   "permissions": [
     "tabs",
-    "<all_urls>",
     "contextMenus",
     "storage"
   ],
   "browser_action": {
     "default_title": "Selected Text",
     "default_popup": "popup.html"
+  },
+  "icons": { 
+    "16": "images/logoIcon-16.png",
+    "32": "images/logoIcon-32.png",
+    "48": "images/logoIcon-48.png",
+   "128": "images/logoIcon-128.png" 
   },
   "manifest_version": 2,
   "background": {  

@@ -6,16 +6,24 @@
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
+    <div id="title">
+      <img
+      src="images/logoIcon-128.png"
+      width="40"
+      height="40"
+      className="d-inline-block align-top navbar-logo-img"
+      alt="Learning Booster"
+      title="Learning Booster from Sean Hsieh"/>
+    </div>
     <div id="mainContainer">
-      <div id="title">Markdown notes</div>
-      <div id="main">
-      </div>
+      <div id="main" class="tab"></div>
       <div id="snackbar">Some text some message..</div>
       <div class="controlPanel">
         <button class="controlPanelItem" id="clear">Remove all</button>
         <button class="controlPanelItem" id="select">Select all</button>
         <button class="controlPanelItem" id="copy">Copy selected</button>
       </div>
+      <div id="usedCapacity"></div>
     </div>
   </body>
 </html>
