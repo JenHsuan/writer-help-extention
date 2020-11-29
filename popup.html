@@ -1,15 +1,21 @@
 <!DOCTYPE html> 
 <html>
   <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="popup.js"></script>
-    <style>
-      body { width: 400px; padding: 5px;}
-      textarea { width: 400px; height: 500px; margin: 0; padding: 0;}
-    </style>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <textarea id="text"> </textarea>
-    <button id="copy">Copy</button>
-    <button id="clear">Clear</button>
+    <div id="mainContainer">
+      <div id="title">Markdown notes</div>
+      <div id="main">
+      </div>
+      <div id="snackbar">Some text some message..</div>
+      <div class="controlPanel">
+        <button class="controlPanelItem" id="clear">Remove all</button>
+        <button class="controlPanelItem" id="select">Select all</button>
+        <button class="controlPanelItem" id="copy">Copy selected</button>
+      </div>
+    </div>
   </body>
 </html>

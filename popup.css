@@ -1,0 +1,261 @@
+body { 
+    width: 400px; 
+    padding: 5px;
+  }
+  #main { 
+    width: 400px; 
+    height: 400px; 
+    margin: 0; 
+    padding: 0;
+    overflow-y: scroll;
+    background-color: gray;
+  }
+  #mainContainer { 
+    width: 400px; 
+    height: 500px; 
+    margin: 0; 
+    padding: 0;
+  }
+  #title {
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .section {
+    font-size: 12px;
+    font-weight: 500;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border: 1px;
+    border-color: gray;
+    border-style: groove;
+    border-radius: 3px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  .sectionLink {
+    font-size: 12px;
+    font-weight: 500;
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+
+  .contentContainer {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    border-radius: 5px;
+    display: none;
+  }
+  .contentContainer-show {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    border-radius: 5px;
+  }
+
+  .contentDate {
+    font-size: 10px;
+    font-weight: 300;
+    border: 1px;
+    background-color: white;
+    border-color: gray;
+    border-style: groove;
+    border-right: none;
+    padding-top: 15%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+  }
+
+  .content {
+    font-size: 10px;
+    font-weight: 300;
+    border: 1px;
+    background-color: white;
+    border-color: gray;
+    border-style: groove;
+    padding-bottom: 5%;
+    grid-column-start: 3;
+    grid-column-end: 10;
+    text-align: center;
+    resize: vertical;
+  }
+
+  .deleteBtn {
+    border: 1px;
+    background-color: white;
+    border-color: gray;
+    border-style: groove;
+    padding-top: 10%;
+    grid-column-start: 11;
+    grid-column-end: 12;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .copyBtn {
+    border: 1px;
+    background-color: white;
+    border-color: gray;
+    border-style: groove;
+    padding-top: 10%;
+    grid-column-start: 10;
+    grid-column-end: 11;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .content::before { 
+        content: "\A"; 
+        white-space: pre; 
+  } 
+
+  .arrow {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      cursor: pointer;
+  }
+  
+  @keyframes move {
+    0% {
+      opacity: 100%;
+    }
+    25% {
+      opacity: 75%;
+    }
+    50% {
+      opacity: 50%;
+    }
+    75% {
+      opacity: 25%;
+    }
+    100% {
+      opacity: 0%;
+    }
+  }
+
+  #snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+  .controlPanel {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 5px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+
+  #clear{
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px;
+    background-color: white;
+    color: black;
+    border-color: gray;
+    border-style: groove;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: center;
+    padding: 2%;
+    margin: 5px;
+    margin-top: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  #clear:hover{
+    background-color: black;
+    color: white;
+  }
+
+  #select{
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px;
+    background-color: white;
+    color: black;
+    border-color: gray;
+    border-style: groove;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    padding: 2%;
+    margin: 5px;
+    margin-top: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  #select:hover{
+    background-color: black;
+    color: white;
+  }
+
+  #copy{
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px;
+    background-color: white;
+    color: black;
+    border-color: gray;
+    border-style: groove;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    text-align: center;
+    padding: 2%;
+    margin: 5px;
+    margin-top: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  #copy:hover{
+    background-color: black;
+    color: white;
+  }

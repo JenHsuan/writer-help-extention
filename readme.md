@@ -7,3 +7,6 @@
 * [Chrome Extension 開發與實作 11-輸入組件 右鍵功能選單(chrome.contextMenus)](https://ithelp.ithome.com.tw/articles/10187476)
 * [[Chrome] Chrome Extension API 筆記](https://pjchender.github.io/2019/05/08/chrome-chrome-extension-api-%E7%AD%86%E8%A8%98/)
 * [Sample Extensions](https://developer.chrome.com/extensions/samples#search:contextmenus)
+* [十分鐘快速掌握 Markdown | 卡斯伯 Blog - 前端，沒有極限](https://wcc723.github.io/development/2019/11/23/ten-mins-learn-markdown/)
+* [[Chrome] Chrome Extension API 筆記 | PJCHENder 未整理筆記](https://pjchender.github.io/2019/05/08/chrome-chrome-extension-api-%E7%AD%86%E8%A8%98/)
+* [Chrome Extension 開發與實作 22-Storage API 優化過的地端儲存API - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10188481)
