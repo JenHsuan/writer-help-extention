@@ -9,21 +9,44 @@
     <div id="title">
       <img
       src="images/logoIcon-128.png"
-      width="40"
-      height="40"
+      width="30"
+      height="30"
       className="d-inline-block align-top navbar-logo-img"
       alt="Learning Booster"
       title="Learning Booster from Sean Hsieh"/>
+      <span id="title">A-Layman Blogger Helper</span>
+      <span id="menu">
+        <span>Documents
+          <i class="fa fa-angle-double-down arrowContainer"></i>
+        </span>
+        <div class="dropdownContent">
+          <div>
+            <a href="">Instruction</a>
+          </div>
+          <div>
+            <a href="https://jenhsuan.github.io/ALayman/profile.html">About author</a>
+          </div>
+          <div>
+            <a href="https://daily-learning.herokuapp.com/">Daily Learning APP</a>
+          </div>
+        </div>
+      </span>
+      <div id="subtitle">Markdown Clipboard</div>
     </div>
     <div id="mainContainer">
       <div id="main" class="tab"></div>
       <div id="snackbar">Some text some message..</div>
       <div class="controlPanel">
         <button class="controlPanelItem" id="clear">Remove all</button>
-        <button class="controlPanelItem" id="select">Select all</button>
-        <button class="controlPanelItem" id="copy">Copy selected</button>
+        <button class="controlPanelItem" id="selectAll">Select all</button>
+        <button class="controlPanelItem" id="unselectAll">Unselect all</button>
+        <button class="controlPanelItem" id="copyAll">Copy selected</button>
       </div>
-      <div id="usedCapacity"></div>
+      <div id="statusBar">
+        <img id="status" src="images/green.png" alt="">
+        <span id="usedCapacity">
+      </div>
+      <textarea id="noteArea"></textarea>
     </div>
   </body>
 </html>

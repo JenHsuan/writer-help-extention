@@ -1,6 +1,10 @@
+let checkboxs = [];
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#clear').addEventListener('click', clear);
+  document.querySelector('#selectAll').addEventListener('click', selectAll);
+  document.querySelector('#unselectAll').addEventListener('click', unselectAll);
+  document.querySelector('#copyAll').addEventListener('click', copyAll);
   
   let main = document.getElementById('main');
   chrome.storage.sync.get("test9",function(items) {
@@ -37,8 +41,31 @@ document.addEventListener('DOMContentLoaded', function() {
       contentContainer.setAttribute("id", ele.id);
       
       for (eleContent of ele.contents) {
-        let id = eleContent.id
+        let id = eleContent.id;
+        checkboxs.push(id);
 
+        let contentCheckbox = document.createElement('input');
+        contentCheckbox.className = 'contentCheckbox'
+        contentCheckbox.checked = eleContent.checked;
+        contentCheckbox.setAttribute("id", `${id}-checkbox`);
+        contentCheckbox.setAttribute("type", "checkbox");
+        contentCheckbox.onchange = function() {
+          toggleCheckbox(id);
+        }
+
+        let contentCheckboxLabel = document.createElement('label');
+        contentCheckboxLabel.setAttribute("for", "contentCheckbox");
+        contentCheckboxLabel.className="contentCheckboxLabel"
+
+        let contentCheckboxSpan = document.createElement('span');
+
+        let contentCheckboxLabelContainer = document.createElement('div');
+        contentCheckboxLabelContainer.className="custom-fa"
+
+        contentCheckboxLabel.appendChild(contentCheckbox)
+        contentCheckboxLabel.appendChild(contentCheckboxSpan)
+        contentCheckboxLabelContainer.appendChild(contentCheckboxLabel)
+        
         let contentDate = document.createElement('div');
         contentDate.className = 'contentDate'
         contentDate.setAttribute("id", `${id}-date`);
@@ -49,6 +76,18 @@ document.addEventListener('DOMContentLoaded', function() {
           content = createCodeBlockElement(eleContent);
         } else if (eleContent.type === 'link') {
           content = createTitleLinkElement(ele.title, ele.url)
+        } else if (eleContent.type === 'H1') {
+          content = createH1Element(eleContent);
+        } else if (eleContent.type === 'H2') {
+          content = createH3Element(eleContent);
+        } else if (eleContent.type === 'H3') {
+          content = createH3Element(eleContent);
+        } else if (eleContent.type === 'H4') {
+          content = createH4Element(eleContent);
+        } else if (eleContent.type === 'H5') {
+          content = createH5Element(eleContent);
+        } else if (eleContent.type === 'H6') {
+          content = createH6Element(eleContent);
         }
         content.setAttribute("id", id);
 
@@ -68,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
           copyItem(id)
         }
 
+        contentContainer.appendChild(contentCheckboxLabel);
         contentContainer.appendChild(contentDate);
         contentContainer.appendChild(content);
         contentContainer.appendChild(copyBtn);
@@ -80,12 +120,24 @@ document.addEventListener('DOMContentLoaded', function() {
   //How much capacities the user use
   let usedCapacity = document.getElementById('usedCapacity');
   chrome.storage.sync.getBytesInUse("test9", function(bytes){
-    if (bytes >= 1024) {
+    let kBUnit = 1024;
+    let mBUnit= 1048576
+    if (bytes >= kBUnit) {
       usedCapacity.innerHTML = `You have used ${(bytes/1024).toFixed(2)} KB`;
-    } else if (bytes >= 1048576) {
+    } else if (bytes >= mBUnit) {
       usedCapacity.innerHTML = `You have used ${(bytes/1048576).toFixed(2)} MB`;
     } else {
       usedCapacity.innerHTML = `You have used ${bytes} Bytes`;
+    }
+
+
+    let status = document.getElementById("status");
+    if (bytes < mBUnit * 2) {
+      status.src = 'images/green.png';
+    } else if (bytes >= mBUnit * 2) {
+      status.src = 'images/yellow.png';
+    } else if (bytes >= mBUnit * 4) {
+      status.src = 'images/red.png';
     }
   });
 
@@ -121,6 +173,21 @@ setting: {
 }
  */
 
+function toggleCheckbox(id){  
+  chrome.storage.sync.get("test9",function(items) {
+    let data = items['test9'];
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].contents.length; j++) {
+        if (data[i].contents[j].id === id) {
+          data[i].contents[j].checked = !data[i].contents[j].checked; 
+        }
+      }  
+    }
+           
+    chrome.storage.sync.set({'test9':data},function() {});
+  });
+}
+
 function controlContent(id) {
   let contentContainer = document.getElementById(id);
   let arrow = document.getElementById(`${id}-arrow`);
@@ -132,6 +199,48 @@ function controlContent(id) {
     contentContainer.className = 'contentContainer'
     arrow.className = "fa fa-angle-double-down arrowContainer";
   }
+}
+
+function createH1Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `# ${eleContent.text}`;
+  return content;
+}
+
+function createH2Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `## ${eleContent.text}`;
+  return content;
+}
+
+function createH3Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `### ${eleContent.text}`;
+  return content;
+}
+
+function createH4Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `#### ${eleContent.text}`;
+  return content;
+}
+
+function createH5Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `##### ${eleContent.text}`;
+  return content;
+}
+
+function createH6Element(eleContent) {
+  let content = document.createElement('textarea');
+  content.className = 'content'
+  content.value = `###### ${eleContent.text}`;
+  return content;
 }
 
 function createTitleLinkElement(title, url) {
@@ -217,6 +326,40 @@ function clear() {
   });
 }
 
+function selectAll(){
+  checkboxs.map(id => {
+    let checkbox = document.getElementById(`${id}-checkbox`);
+    checkbox.checked = true;
+  })
+  chrome.storage.sync.get("test9",function(items) {
+    let data = items['test9'];
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].contents.length; j++) {
+        data[i].contents[j].checked = true; 
+      }  
+    }
+           
+    chrome.storage.sync.set({'test9':data},function() {});
+  });
+}
+
+function unselectAll(){
+  checkboxs.map(id => {
+    let checkbox = document.getElementById(`${id}-checkbox`);
+    checkbox.checked = false;
+  })
+  chrome.storage.sync.get("test9",function(items) {
+    let data = items['test9'];
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].contents.length; j++) {
+        data[i].contents[j].checked = false; 
+      }  
+    }
+           
+    chrome.storage.sync.set({'test9':data},function() {});
+  });
+}
+
 function copyItem(id) {
   //alert(id);
   let copyText = document.getElementById(id);
@@ -234,6 +377,26 @@ function copyItem(id) {
   let x = document.getElementById("snackbar");
   x.className = "show";
   x.innerHTML = `Copied the text: ${copyText.value}`;
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
+}
+
+function copyAll() {
+  checkboxs.map(id => {
+    let checkbox = document.getElementById(`${id}-checkbox`);
+    if (checkbox.checked) {
+      let content = document.getElementById(id);
+      content.select()
+      content.setSelectionRange(0, 99999); /*For mobile devices*/
+    }
+  })
+  
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  let x = document.getElementById("snackbar");
+  x.className = "show";
+  x.innerHTML = `Copied all`;
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
 }
 
