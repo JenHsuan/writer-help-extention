@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let contentCheckboxLabel = document.createElement('label');
         contentCheckboxLabel.setAttribute("for", "contentCheckbox");
-        contentCheckboxLabel.className="contentCheckboxLabel"
+        contentCheckboxLabel.className="contentCheckboxLabel";
 
         let contentCheckboxSpan = document.createElement('span');
 
@@ -255,7 +255,7 @@ function createCodeBlockElement(eleContent) {
   let content = document.createElement('textarea');
   content.className = 'content'
   content.value = '```';
-  content.value = content.value + '\n' + eleContent.text + '\n';
+  content.value = content.value + '\r\n' + eleContent.text + '\r\n';
   content.value = content.value + '```';
   return content;
 }
@@ -381,17 +381,19 @@ function copyItem(id) {
 }
 
 function copyAll() {
+  let noteArea = document.getElementById("noteArea")
   checkboxs.map(id => {
     let checkbox = document.getElementById(`${id}-checkbox`);
     if (checkbox.checked) {
       let content = document.getElementById(id);
-      content.select()
-      content.setSelectionRange(0, 99999); /*For mobile devices*/
+      noteArea.value = noteArea.value + "* " +  content.value + '\r\n'; 
     }
   })
-  
-  /* Copy the text inside the text field */
+  noteArea.style.display = 'block'
+  noteArea.select()
+  noteArea.setSelectionRange(0, 99999); /*For mobile devices*/
   document.execCommand("copy");
+  noteArea.style.display = 'none'
 
   /* Alert the copied text */
   let x = document.getElementById("snackbar");

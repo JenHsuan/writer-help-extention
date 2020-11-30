@@ -11,8 +11,8 @@ body {
     background-color: gray;
   }
   #noteArea{
-    width: 400px; 
-    height: 400px; 
+    width: 4px; 
+    height: 4px; 
     resize: none;
     display: none;
   }
@@ -44,7 +44,7 @@ body {
   }
   #mainContainer { 
     width: 380px; 
-    height: 600px; 
+    height: 500px; 
     margin: 10px; 
     padding: 0;
   }
@@ -66,12 +66,13 @@ body {
   #title #subtitle {
     padding-left: 40px;
     color: gray;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
   #title #menu{
     border-color: gray;
     border-style: solid;
     border-radius: 15px;
-    font-size: 6px;
+    font-size: 12px;
     margin-left: 15px;
     padding-left: 1px;
     padding-right: 10px;
@@ -81,11 +82,11 @@ body {
     color: black;
   }
   #title #menu span{
-    font-size: 6px;
+    font-size: 12px;
     color: black;
   }
   .section {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     background-color:  #499FB5;
     color: white;
@@ -99,7 +100,7 @@ body {
   }
 
   .sectionLink {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     background-color:  #499FB5;
     color: #F2F3F4;
@@ -131,7 +132,7 @@ body {
   }
 
   .contentDate {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 300;
     border: 1px;
     background-color: white;
@@ -145,7 +146,7 @@ body {
   }
 
   .content {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 300;
     border: 1px;
     background-color: white;
@@ -270,7 +271,7 @@ body {
   }
 
   #clear{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     border: 1px;
     background-color: #499FB5;
@@ -290,7 +291,7 @@ body {
   }
 
   #selectAll{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     border: 1px;
     background-color: #499FB5;
@@ -310,7 +311,7 @@ body {
   }
 
   #unselectAll{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     border: 1px;
     background-color: #499FB5;
@@ -330,7 +331,7 @@ body {
   }
 
   #copyAll{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     border: 1px;
     background-color: #499FB5;
@@ -362,14 +363,16 @@ body {
     display: none;
     position: absolute;
     background-color: black;
-    min-width: 120px;
+    min-width: 150px;
+    min-height: 130px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1000;
     color: white;
-    left: 60%;
-    opacity: 0.9;
+    left: 50%;
+    opacity: 0.8;
     border-radius: 5px;
+    font-size: 14px;
   }
   
   #menu:hover .dropdownContent {
@@ -378,9 +381,16 @@ body {
   }
 
   #menu .dropdownContent a{
-    color: white;
+    color: #499FB5;
     text-decoration: none;
+    padding-top: 5px;
+    font-size: 18px;
+    font-weight: 500;
   }
   #menu .dropdownContent div{
-    padding-top: 5px;
+    padding-top: 15px;
+  }  
+  #menu .dropdownContent a:hover{
+    color: white;
+    text-decoration: none;
   }

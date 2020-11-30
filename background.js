@@ -114,12 +114,12 @@ function getHash(key) {
 
 chrome.runtime.onInstalled.addListener(function() {
     let parent = chrome.contextMenus.create({
-        "title": "Copy and format",
+        "title": "Copy and format to markdown syntax",
         "contexts": ['all']    
     });
 
     let selected = chrome.contextMenus.create({  
-        "title": "For selected sentences",  
+        "title": "Turn selected sentences to...",  
         "type": "normal",  
         "contexts": ['all'],  
         "parentId": parent
