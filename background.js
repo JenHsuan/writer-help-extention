@@ -114,12 +114,12 @@ function getHash(key) {
 
 chrome.runtime.onInstalled.addListener(function() {
     let parent = chrome.contextMenus.create({
-        "title": "Copy and format to markdown syntax",
+        "title": "Format and copy to the clipboard",
         "contexts": ['all']    
     });
 
     let selected = chrome.contextMenus.create({  
-        "title": "Turn selected sentences to...",  
+        "title": "Turn selected content into markdown syntax",  
         "type": "normal",  
         "contexts": ['all'],  
         "parentId": parent
@@ -134,7 +134,7 @@ chrome.runtime.onInstalled.addListener(function() {
     });  
 
     let link = chrome.contextMenus.create({  
-        "title": "Get the tab reference",  
+        "title": "Get the link of the current tab",  
         "type": "normal",  
         "contexts": ['all'],  
         "parentId": parent,  
