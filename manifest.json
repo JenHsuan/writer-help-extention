@@ -1,7 +1,7 @@
 {
   "name": "Markdown Clipboard",
   "version": "1.0",
-  "description": "A tool",
+  "description": "This plugin can improve your productivity by reducing the time for editing markdown syntax. It's also a memorandum for your visited website.",
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],

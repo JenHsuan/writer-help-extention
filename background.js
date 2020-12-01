@@ -65,7 +65,6 @@ function h2Click(info, tab) {
     createElementsFromLocalStorage(info, tab, 'H2');
 }
 
-
 function h3Click(info, tab) {
     createElementsFromLocalStorage(info, tab, 'H3');
 }
@@ -82,29 +81,13 @@ function h6Click(info, tab) {
     createElementsFromLocalStorage(info, tab, 'H6');
 }
 
-function singleLineCodeClick(info, tab) {
-    /*
-    let data = "ID是：" + info.menuItemId + "\n" +  
-    "現在的網址是：" + info.pageUrl + "\n" +  
-    "選取的文字是：" + (info.selectionText ? info.selectionText : "") + "\n" +  
-    "現在hover元素的圖片來源：" + (info.srcUrl ? info.srcUrl : "") + "\n" +  
-    "現在hover的連結：" + (info.linkUrl ? info.linkUrl : "") + "\n" +  
-    "現在hover的frame是：" + (info.frameUrl ? info.frameUrl : "") + "\n" +
-    "tab: " + JSON.stringify(tab);
+function refClick(info, tab) {
+    createElementsFromLocalStorage(info, tab, 'ref');
+}
 
-    alayman-writer: [
-        {
-            title: title1,
-            contents:[{
-                type:
-                text
-            }],
-            url:[]
-        }
-    ]
-    */
+function singleLineCodeClick(info, tab) {
    createElementsFromLocalStorage(info, tab, 'code');
-};
+}
 
 function getHash(key) {
     const hash = Array.from(key).reduce(
@@ -187,6 +170,14 @@ chrome.runtime.onInstalled.addListener(function() {
         "contexts": ['all'],  
         "parentId": selected,  
         "onclick": h6Click  
+    });  
+
+    let ref = chrome.contextMenus.create({  
+        "title": "Reference",  
+        "type": "normal",  
+        "contexts": ['all'],  
+        "parentId": selected,  
+        "onclick": refClick  
     });  
 
 

@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let sectionLink = document.createElement('a');
       sectionLink.innerHTML = ele.title;
-      sectionLink.className = 'sectionLink'
-      sectionLink.href = ele.url
+      sectionLink.className = 'sectionLink';
+      sectionLink.href = ele.url;
 
-      section.appendChild(sectionLink)
+      section.appendChild(sectionLink);
 
       let arrow = document.createElement('i');
       arrow.className = "fa fa-angle-double-down arrowContainer";
@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let arrowContainer = document.createElement('div');
       arrowContainer.className = "arrow";
-      arrowContainer.appendChild(arrow)
-      let id = ele.id
+      arrowContainer.appendChild(arrow);
+      let id = ele.id;
       arrowContainer.onclick = function(){
         controlContent(id);
-      }
+      };
       section.appendChild(arrowContainer);
       main.appendChild(section);
 
@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
         checkboxs.push(id);
 
         let contentCheckbox = document.createElement('input');
-        contentCheckbox.className = 'contentCheckbox'
+        contentCheckbox.className = 'contentCheckbox';
         contentCheckbox.checked = eleContent.checked;
         contentCheckbox.setAttribute("id", `${id}-checkbox`);
         contentCheckbox.setAttribute("type", "checkbox");
         contentCheckbox.onchange = function() {
           toggleCheckbox(id);
-        }
+        };
 
         let contentCheckboxLabel = document.createElement('label');
         contentCheckboxLabel.setAttribute("for", "contentCheckbox");
@@ -60,14 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let contentCheckboxSpan = document.createElement('span');
 
         let contentCheckboxLabelContainer = document.createElement('div');
-        contentCheckboxLabelContainer.className="custom-fa"
+        contentCheckboxLabelContainer.className="custom-fa";
 
-        contentCheckboxLabel.appendChild(contentCheckbox)
-        contentCheckboxLabel.appendChild(contentCheckboxSpan)
-        contentCheckboxLabelContainer.appendChild(contentCheckboxLabel)
+        contentCheckboxLabel.appendChild(contentCheckbox);
+        contentCheckboxLabel.appendChild(contentCheckboxSpan);
+        contentCheckboxLabelContainer.appendChild(contentCheckboxLabel);
         
         let contentDate = document.createElement('div');
-        contentDate.className = 'contentDate'
+        contentDate.className = 'contentDate';
         contentDate.setAttribute("id", `${id}-date`);
         contentDate.innerHTML = eleContent.type ;
 
@@ -96,16 +96,15 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteBtn.setAttribute("id", `${id}-deleteBtn`);
         deleteBtn.style = "font-size:22px";
         deleteBtn.onclick = function() {
-          clearItem(id)
-        }
-
+          clearItem(id);
+        };
         let copyBtn = document.createElement('div');
         copyBtn.className = className = "fa fa-copy copyBtn";
         copyBtn.setAttribute("id", `${id}-copyBtn`);
         copyBtn.style = "font-size:22px";
         copyBtn.onclick = function(){
-          copyItem(id)
-        }
+          copyItem(id);
+        };
 
         contentContainer.appendChild(contentCheckboxLabel);
         contentContainer.appendChild(contentDate);
@@ -121,38 +120,26 @@ document.addEventListener('DOMContentLoaded', function() {
   let usedCapacity = document.getElementById('usedCapacity');
   chrome.storage.sync.getBytesInUse("test9", function(bytes){
     let kBUnit = 1024;
-    let mBUnit= 1048576
+    let mBUnit= 1048576;
+    let consumed = (bytes/chrome.storage.sync.QUOTA_BYTES * 100).toFixed(2);
     if (bytes >= kBUnit) {
-      usedCapacity.innerHTML = `You have used ${(bytes/1024).toFixed(2)} KB`;
+      usedCapacity.innerHTML = `You have used ${(bytes/1024).toFixed(2)} KB (${consumed}%)`;
     } else if (bytes >= mBUnit) {
-      usedCapacity.innerHTML = `You have used ${(bytes/1048576).toFixed(2)} MB`;
+      usedCapacity.innerHTML = `You have used ${(bytes/1048576).toFixed(2)} MB (${consumed}%)`;
     } else {
-      usedCapacity.innerHTML = `You have used ${bytes} Bytes`;
+      usedCapacity.innerHTML = `You have used ${bytes} Bytes (${consumed}%)`;
     }
 
 
     let status = document.getElementById("status");
-    if (bytes < mBUnit * 2) {
+    if (consumed < 70) {
       status.src = 'images/green.png';
-    } else if (bytes >= mBUnit * 2) {
+    } else if (consumed >= 70) {
       status.src = 'images/yellow.png';
-    } else if (bytes >= mBUnit * 4) {
+    } else if (consumed >= 90) {
       status.src = 'images/red.png';
     }
   });
-
-  //button event
-  /*
-  let markdown = document.getElementById('markdown');
-  markdown.onclick = function() {
-    openTab('markdown');
-  }
-
-  let notes = document.getElementById('notes');
-  notes.onclick = function() {
-    openTab('notes');
-  }
-  */
 });
 /*
 alayman-writer: [
@@ -203,49 +190,49 @@ function controlContent(id) {
 
 function createH1Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `# ${eleContent.text}`;
   return content;
 }
 
 function createH2Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `## ${eleContent.text}`;
   return content;
 }
 
 function createH3Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `### ${eleContent.text}`;
   return content;
 }
 
 function createH4Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `#### ${eleContent.text}`;
   return content;
 }
 
 function createH5Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `##### ${eleContent.text}`;
   return content;
 }
 
 function createH6Element(eleContent) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `###### ${eleContent.text}`;
   return content;
 }
 
 function createTitleLinkElement(title, url) {
   let content = document.createElement('textarea');
-  content.className = 'content'
+  content.className = 'content';
   content.value = `[${title}](${url})`;
 
   return content;

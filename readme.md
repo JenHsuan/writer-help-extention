@@ -1,3 +1,24 @@
+# A-Layman Blogger Helper - Markdown Clipboard
+
+## Introduction
+People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. This kind of job is so messy that I believe that it’s worthy to solve.
+
+There are two reasons for me to decide to create a utility with a Chrome extension.
+1. We can copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
+2. We don’t have to leave tabs for content that we haven’t read yet
+
+## Stacks or libraries
+* HTML, CSS, JavaScript
+* CSS grid
+* font-awesome
+
+## Skills
+* DOM operations 
+* Storage APIs
+* ContextMenus
+
+## Usage
+
 ## References
 * [Creating a chrome extension which takes highlighted text on the page and inserts it into a textarea in popup.html](https://stackoverflow.com/questions/14349263/creating-a-chrome-extension-which-takes-highlighted-text-on-the-page-and-inserts#answer-14351458)
 * [How to Fix: Could not establish connection. Receiving end does not exist](https://www.bennettnotes.com/post/fix-receiving-end-does-not-exist/)
