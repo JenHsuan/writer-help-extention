@@ -15,7 +15,7 @@ There are two reasons for me to decide to create a utility with a Chrome extensi
 ![rlick ght-click menu](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/rightClickMenu.png?raw=true){width="200px"}
 
 2. Clicke the icon. Choose the copied item to copy to the clipboad.
-![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/popup.png?raw=true){width="200px"}
+![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/popup.png?raw=true){width="100px"}
 
 3. Paste to the blog whuch supports markdown syntax
 
