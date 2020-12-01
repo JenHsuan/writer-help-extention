@@ -1,6 +1,7 @@
 {
   "name": "Markdown Clipboard",
   "version": "1.0",
+  "author": "Jen-Hsuan Hsieh",
   "description": "This plugin can improve your productivity by reducing the time for editing markdown syntax. It's also a memorandum for your visited website.",
   "content_scripts": [
     {
