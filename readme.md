@@ -4,10 +4,9 @@
 People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. This kind of job is so messy that I believe that it’s worthy to solve.
 
 ## Capabilities
-### Advantages
-There are two reasons for me to decide to create a utility with a Chrome extension.
-1. We can copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
+1. Copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
 2. We don’t have to leave tabs for content that we haven’t read yet
+
 ### Supported markdown syntax
 * Link
 * Code block
@@ -15,13 +14,13 @@ There are two reasons for me to decide to create a utility with a Chrome extensi
 
 ## Instructions
 1. Select the content and right-click on the page. Choose the markdown style.
-![rlick ght-click menu](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/rightClickMenu.png?raw=true)
+![rlick ght-click menu](https://github.com/JenHsuan/writer-help-extention/blob/master/screen-shots/rightClickMenu.png?raw=true)
 
 2. Clicke the icon. Choose the copied item to copy to the clipboad.
-![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/popup2.png?raw=true)
+![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/screen-shots/popup2.png?raw=true)
 
 3. Paste to the blog whuch supports markdown syntax
-![blog](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/paste.png?raw=true)
+![blog](https://github.com/JenHsuan/writer-help-extention/blob/master/screen-shots/paste.png?raw=true)
 
 ## Stacks or libraries
 * HTML, CSS, JavaScript
