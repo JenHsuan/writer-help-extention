@@ -11,7 +11,13 @@ There are two reasons for me to decide to create a utility with a Chrome extensi
 ## Capabilities
 
 ## Instructions
-1.  
+1. Select the content and right-click on the page. Choose the markdown style.
+![rlick ght-click menu](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/rightClickMenu.png?raw=true)
+
+2. Clicke the icon. Choose the copied item to copy to the clipboad.
+![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/popup.png?raw=true)
+
+3. Paste to the blog whuch supports markdown syntax
 
 ## Stacks or libraries
 * HTML, CSS, JavaScript
