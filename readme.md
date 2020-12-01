@@ -3,9 +3,15 @@
 ## Introduction
 People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. This kind of job is so messy that I believe that it’s worthy to solve.
 
+### Advantages
 There are two reasons for me to decide to create a utility with a Chrome extension.
 1. We can copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
 2. We don’t have to leave tabs for content that we haven’t read yet
+
+## Capabilities
+
+## Instructions
+1.  
 
 ## Stacks or libraries
 * HTML, CSS, JavaScript
@@ -17,7 +23,6 @@ There are two reasons for me to decide to create a utility with a Chrome extensi
 * Storage APIs
 * ContextMenus
 
-## Usage
 
 ## References
 * [Creating a chrome extension which takes highlighted text on the page and inserts it into a textarea in popup.html](https://stackoverflow.com/questions/14349263/creating-a-chrome-extension-which-takes-highlighted-text-on-the-page-and-inserts#answer-14351458)
