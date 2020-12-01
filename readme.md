@@ -3,12 +3,15 @@
 ## Introduction
 People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. This kind of job is so messy that I believe that it’s worthy to solve.
 
+## Capabilities
 ### Advantages
 There are two reasons for me to decide to create a utility with a Chrome extension.
 1. We can copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
 2. We don’t have to leave tabs for content that we haven’t read yet
-
-## Capabilities
+### Supported markdown syntax
+* Link
+* Code block
+* H1 ~ H6
 
 ## Instructions
 1. Select the content and right-click on the page. Choose the markdown style.
@@ -18,6 +21,7 @@ There are two reasons for me to decide to create a utility with a Chrome extensi
 ![popup](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/popup2.png?raw=true){width="100px"}
 
 3. Paste to the blog whuch supports markdown syntax
+![blog](https://github.com/JenHsuan/writer-help-extention/blob/master/instructions/paste.png?raw=true){width="100px"}
 
 ## Stacks or libraries
 * HTML, CSS, JavaScript
