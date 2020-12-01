@@ -3,20 +3,13 @@
   "version": "1.0",
   "author": "Jen-Hsuan Hsieh",
   "description": "This plugin can improve your productivity by reducing the time for editing markdown syntax. It's also a memorandum for your visited website.",
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["selection.js"],
-      "all_frames": true
-    }
-  ],
   "permissions": [
     "tabs",
     "contextMenus",
     "storage"
   ],
   "browser_action": {
-    "default_title": "Selected Text",
+    "default_title": "Markdown Clipboard",
     "default_popup": "popup.html"
   },
   "icons": { 
@@ -25,7 +18,7 @@
     "48": "images/logoIcon-48.png",
    "128": "images/logoIcon-128.png" 
   },
-  "manifest_version": 2,
+  "manifest_version": 1,
   "background": {  
     "scripts": ["background.js"],  
     "persistent": true 
