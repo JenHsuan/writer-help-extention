@@ -15,7 +15,6 @@ function createElementsFromLocalStorage(info, tab, type){
         idMap[newTitleKey] = idMap.hasOwnProperty(newTitleKey) ? idMap[newTitleKey]+1 : 0;
         let newTitleId = `${newTitleKey}-${idMap[newTitleKey]}`;
         
-        //alert(newTitleId)
         let newData = {
             'type': type,
             'text': text,
@@ -44,12 +43,6 @@ function createElementsFromLocalStorage(info, tab, type){
             let ele = list.find(data => data.title === newTitle);
             ele.contents.push(newData) 
         }
-        
-        chrome.storage.sync.set({'test9':list},function() {
-         chrome.storage.sync.get('test9',function(newItems) {
-             //alert(JSON.stringify(newItems))
-         });
-        });
     });
 }
 

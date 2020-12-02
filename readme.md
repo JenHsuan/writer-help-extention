@@ -1,11 +1,11 @@
 # A-Layman Blogger Helper - Markdown Clipboard
 
 ## Introduction
-People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. This kind of job is so messy that I believe that it’s worthy to solve.
+People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. 
 
-## Capabilities
-1. Copy contents, turn them into markdown syntax, and paste them without switch tabs or extra monitor
-2. We don’t have to leave tabs for content that we haven’t read yet
+This extension provides two abilities
+1. Copy contents on the tabs and turn them into markdown syntax
+2. Save tabs instead of keep opening on the browser
 
 ### Supported markdown syntax
 * Link
@@ -22,16 +22,10 @@ People who work as developers or bloggers usually open a lot of Chrome tabs to c
 3. Paste to the blog whuch supports markdown syntax
 ![blog](https://github.com/JenHsuan/writer-help-extention/blob/master/screen-shots/paste.png?raw=true)
 
-## Stacks or libraries
-* HTML, CSS, JavaScript
-* CSS grid
-* font-awesome
-
-## Skills
+## Keywords
 * DOM operations 
 * Storage APIs
 * ContextMenus
-
 
 ## References
 * [Creating a chrome extension which takes highlighted text on the page and inserts it into a textarea in popup.html](https://stackoverflow.com/questions/14349263/creating-a-chrome-extension-which-takes-highlighted-text-on-the-page-and-inserts#answer-14351458)

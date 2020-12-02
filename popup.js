@@ -56,15 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let contentCheckboxLabel = document.createElement('label');
         contentCheckboxLabel.setAttribute("for", "contentCheckbox");
         contentCheckboxLabel.className="contentCheckboxLabel";
+        contentCheckboxLabel.setAttribute("id", `${id}-contentCheckboxLabel`);
 
         let contentCheckboxSpan = document.createElement('span');
 
-        let contentCheckboxLabelContainer = document.createElement('div');
-        contentCheckboxLabelContainer.className="custom-fa";
 
         contentCheckboxLabel.appendChild(contentCheckbox);
         contentCheckboxLabel.appendChild(contentCheckboxSpan);
-        contentCheckboxLabelContainer.appendChild(contentCheckboxLabel);
         
         let contentDate = document.createElement('div');
         contentDate.className = 'contentDate';
@@ -254,15 +252,20 @@ function getHash(key) {
 }
 
 function clearItem(id) {
-  let x = document.getElementById("snackbar");
-  x.className = "show";
-  x.innerHTML = `remove the text`;
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
+  let snackbar = document.getElementById("snackbar");
+  snackbar.className = "show";
+  snackbar.innerHTML = `remove the text`;
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 
   let content = document.getElementById(id);
   if (content) {
     content.remove();
   }
+  let contentCheckboxLabel = document.getElementById(`${id}-contentCheckboxLabel`);
+  if (contentCheckboxLabel) {
+    contentCheckboxLabel.remove();
+  }
+  
   let contentDate = document.getElementById(`${id}-date`);
   if (contentDate) {
     contentDate.remove();
@@ -348,26 +351,23 @@ function unselectAll(){
 }
 
 function copyItem(id) {
-  //alert(id);
-  let copyText = document.getElementById(id);
-  //alert(copyText)
+  let snackbar = document.getElementById("snackbar");
+  snackbar.className = "show";
+  snackbar.innerHTML = "Copied the text";
+  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 
-  /* Select the text field */
+  let copyText = document.getElementById(id);
   copyText.select();
   copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
   document.execCommand("copy");
-
-  /* Alert the copied text */
-  //alert("Copied the text: " + copyText.value);
-  let x = document.getElementById("snackbar");
-  x.className = "show";
-  x.innerHTML = `Copied the text: ${copyText.value}`;
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
 }
 
 function copyAll() {
+  let x = document.getElementById("snackbar");
+  x.className = "show";
+  x.innerHTML = "Copied all";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
   let noteArea = document.getElementById("noteArea")
   checkboxs.map(id => {
     let checkbox = document.getElementById(`${id}-checkbox`);
@@ -381,41 +381,6 @@ function copyAll() {
   noteArea.setSelectionRange(0, 99999); /*For mobile devices*/
   document.execCommand("copy");
   noteArea.style.display = 'none'
-
-  /* Alert the copied text */
-  let x = document.getElementById("snackbar");
-  x.className = "show";
-  x.innerHTML = `Copied all`;
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
-}
-
-function copy() {
-  var copyText = document.getElementById("text");
-
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
-}
-
-function pasteSelection() {
-  chrome.tabs.query({active: true, windowId: chrome.windows.WINDOW_ID_CURRENT}, function(tabs) {
-      //tabs.map(tab => {
-        var text = document.getElementById('text'); 
-        chrome.tabs.sendMessage(tabs[0].id, { action: "response" }, function(response){
-          
-        text.innerHTML = text.innerHTML + tabs[0].url + '\n';
-        text.innerHTML = text.innerHTML + tabs[0].title + '\n';
-         //alert('The response is : ' + response.data);
-          text.innerHTML = text.innerHTML + response.data;
-      });
-      //})
-  });
 }
 
 function openTab(tabName) {

@@ -229,16 +229,12 @@ body {
     bottom: 30px; /* 30px from the bottom */
   }
   
-  /* Show the snackbar when clicking on a button (class added with JavaScript) */
   #snackbar.show {
-    visibility: visible; /* Show the snackbar */
-    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-    However, delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    visibility: visible; 
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 1.0s;
+    animation: fadein 0.5s, fadeout 0.5s 1.0s;
   }
   
-  /* Animations to fade the snackbar in and out */
   @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
@@ -346,7 +342,7 @@ body {
     border-radius: 3px;
     cursor: pointer;
   }
-  #copy:hover{
+  #copyAll:hover{
     background-color: black;
     color: white;
   }
@@ -363,16 +359,15 @@ body {
     display: none;
     position: absolute;
     background-color: black;
-    min-width: 150px;
-    min-height: 130px;
+    min-width: 100px;
+    min-height: 90px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
+    padding: 5px 5px;
     z-index: 1000;
     color: white;
-    left: 50%;
+    left: 65%;
     opacity: 0.8;
     border-radius: 5px;
-    font-size: 14px;
   }
   
   #menu:hover .dropdownContent {
@@ -383,12 +378,13 @@ body {
   #menu .dropdownContent a{
     color: #499FB5;
     text-decoration: none;
-    padding-top: 5px;
-    font-size: 18px;
+    padding-top: 3px;
+    font-size: 14px;
     font-weight: 500;
   }
   #menu .dropdownContent div{
-    padding-top: 15px;
+    padding-top: 10px;
+    padding-left: 5px;
   }  
   #menu .dropdownContent a:hover{
     color: white;
