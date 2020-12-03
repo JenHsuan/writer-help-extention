@@ -1,10 +1,25 @@
-let checkboxs = [];
+const checkboxs = [];
+const instruction = "https://github.com/JenHsuan/writer-help-extention";
+const author = "https://jenhsuan.github.io/ALayman/profile.html";
+const dailyLearning = "https://daily-learning.herokuapp.com/";
+const markdownStyleEnum = {
+  H1: "#",
+  H2: "##",
+  H3: "###",
+  H4: "####",
+  H5: "#####",
+  H6: "######",
+};
+
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#clear').addEventListener('click', clear);
   document.querySelector('#selectAll').addEventListener('click', selectAll);
   document.querySelector('#unselectAll').addEventListener('click', unselectAll);
   document.querySelector('#copyAll').addEventListener('click', copyAll);
+  document.querySelector('#instruction').addEventListener('click', () => window.open(instruction));
+  document.querySelector('#author').addEventListener('click', () => window.open(author));
+  document.querySelector('#dailyLearning').addEventListener('click', () => window.open(dailyLearning));
   
   let main = document.getElementById('main');
   chrome.storage.sync.get("test9",function(items) {
@@ -12,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   for (ele of data) {
       let section = document.createElement('div');
-      section.className = 'section'
+      section.className = 'section';
 
       let sectionLink = document.createElement('a');
       sectionLink.innerHTML = ele.title;
@@ -30,9 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
       arrowContainer.className = "arrow";
       arrowContainer.appendChild(arrow);
       let id = ele.id;
-      arrowContainer.onclick = function(){
-        controlContent(id);
-      };
+      arrowContainer.onclick = () => controlContent(id);
+      
       section.appendChild(arrowContainer);
       main.appendChild(section);
 
@@ -49,9 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         contentCheckbox.checked = eleContent.checked;
         contentCheckbox.setAttribute("id", `${id}-checkbox`);
         contentCheckbox.setAttribute("type", "checkbox");
-        contentCheckbox.onchange = function() {
-          toggleCheckbox(id);
-        };
+        contentCheckbox.onchange = () => toggleCheckbox(id);
 
         let contentCheckboxLabel = document.createElement('label');
         contentCheckboxLabel.setAttribute("for", "contentCheckbox");
@@ -59,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
         contentCheckboxLabel.setAttribute("id", `${id}-contentCheckboxLabel`);
 
         let contentCheckboxSpan = document.createElement('span');
-
 
         contentCheckboxLabel.appendChild(contentCheckbox);
         contentCheckboxLabel.appendChild(contentCheckboxSpan);
@@ -73,36 +84,23 @@ document.addEventListener('DOMContentLoaded', function() {
         if (eleContent.type === 'code') {
           content = createCodeBlockElement(eleContent);
         } else if (eleContent.type === 'link') {
-          content = createTitleLinkElement(ele.title, ele.url)
-        } else if (eleContent.type === 'H1') {
-          content = createH1Element(eleContent);
-        } else if (eleContent.type === 'H2') {
-          content = createH3Element(eleContent);
-        } else if (eleContent.type === 'H3') {
-          content = createH3Element(eleContent);
-        } else if (eleContent.type === 'H4') {
-          content = createH4Element(eleContent);
-        } else if (eleContent.type === 'H5') {
-          content = createH5Element(eleContent);
-        } else if (eleContent.type === 'H6') {
-          content = createH6Element(eleContent);
-        }
+          content = createTitleLinkElement(ele.title, ele.url);
+        } else {
+          content = createGeneralElement(eleContent, markdownStyleEnum[eleContent.type]);
+        } 
         content.setAttribute("id", id);
 
         let deleteBtn = document.createElement('div');
         deleteBtn.className = className = "fa fa-trash deleteBtn";
         deleteBtn.setAttribute("id", `${id}-deleteBtn`);
         deleteBtn.style = "font-size:22px";
-        deleteBtn.onclick = function() {
-          clearItem(id);
-        };
+        deleteBtn.onclick = () => clearItem(id);
+        
         let copyBtn = document.createElement('div');
         copyBtn.className = className = "fa fa-copy copyBtn";
         copyBtn.setAttribute("id", `${id}-copyBtn`);
         copyBtn.style = "font-size:22px";
-        copyBtn.onclick = function(){
-          copyItem(id);
-        };
+        copyBtn.onclick = () => copyItem(id);
 
         contentContainer.appendChild(contentCheckboxLabel);
         contentContainer.appendChild(contentDate);
@@ -186,45 +184,22 @@ function controlContent(id) {
   }
 }
 
-function createH1Element(eleContent) {
-  let content = document.createElement('textarea');
-  content.className = 'content';
-  content.value = `# ${eleContent.text}`;
+function createCustomizedElement(type, className, value, id, href, onClickCallback, onChangeCallback) {
+  let content = document.createElement(type);
+  content.className = className;
+  content.value = value;
+  content.href = href;
+  content.setAttribute("id", id);
+  content.onclick = onClickCallback;
+  content.onchange = onChangeCallback;
   return content;
 }
 
-function createH2Element(eleContent) {
-  let content = document.createElement('textarea');
-  content.className = 'content';
-  content.value = `## ${eleContent.text}`;
-  return content;
-}
 
-function createH3Element(eleContent) {
+function createGeneralElement(eleContent, style) {
   let content = document.createElement('textarea');
   content.className = 'content';
-  content.value = `### ${eleContent.text}`;
-  return content;
-}
-
-function createH4Element(eleContent) {
-  let content = document.createElement('textarea');
-  content.className = 'content';
-  content.value = `#### ${eleContent.text}`;
-  return content;
-}
-
-function createH5Element(eleContent) {
-  let content = document.createElement('textarea');
-  content.className = 'content';
-  content.value = `##### ${eleContent.text}`;
-  return content;
-}
-
-function createH6Element(eleContent) {
-  let content = document.createElement('textarea');
-  content.className = 'content';
-  content.value = `###### ${eleContent.text}`;
+  content.value = `${style} ${eleContent.text}`;
   return content;
 }
 
