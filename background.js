@@ -43,6 +43,12 @@ function createElementsFromLocalStorage(info, tab, type){
             let ele = list.find(data => data.title === newTitle);
             ele.contents.push(newData) 
         }
+
+        chrome.storage.sync.set({'test9':list},function() {	
+            chrome.storage.sync.get('test9',function(newItems) {	
+                //alert(JSON.stringify(newItems))	
+            });	
+        });
     });
 }
 
