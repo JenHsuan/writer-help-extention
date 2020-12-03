@@ -22,84 +22,59 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#dailyLearning').addEventListener('click', () => window.open(dailyLearning));
   
   let main = document.getElementById('main');
-  chrome.storage.sync.get("test9",function(items) {
+
+  chrome.storage.sync.get('test9', function(items) {
   let data = items['test9'];
   
   for (ele of data) {
-      let section = document.createElement('div');
-      section.className = 'section';
-
-      let sectionLink = document.createElement('a');
-      sectionLink.innerHTML = ele.title;
-      sectionLink.className = 'sectionLink';
-      sectionLink.href = ele.url;
-
+      let id = ele.id;
+    
+      let section = createGeneralElement('div', 'section');
+      let sectionLink = createGeneralElement('a', 'sectionLink', '', ele.title, ele.url);
       section.appendChild(sectionLink);
 
-      let arrow = document.createElement('i');
-      arrow.className = "fa fa-angle-double-down arrowContainer";
-      arrow.style = "font-size:16px";
-      arrow.setAttribute("id", `${ele.id}-arrow`);
-
-      let arrowContainer = document.createElement('div');
-      arrowContainer.className = "arrow";
-      arrowContainer.appendChild(arrow);
-      let id = ele.id;
+      let arrow = createGeneralElement('i', 'fa fa-angle-double-down arrowContainer', `${id}-arrow`);
+      let arrowContainer = createGeneralElement('div', 'arrow');
       arrowContainer.onclick = () => controlContent(id);
-      
+      arrowContainer.appendChild(arrow);
+
       section.appendChild(arrowContainer);
       main.appendChild(section);
 
-      let contentContainer = document.createElement('div');
-      contentContainer.className = 'contentContainer';
-      contentContainer.setAttribute("id", ele.id);
+      let contentContainer = createGeneralElement('div', 'contentContainer', ele.id);
       
       for (eleContent of ele.contents) {
         let id = eleContent.id;
         checkboxs.push(id);
 
-        let contentCheckbox = document.createElement('input');
-        contentCheckbox.className = 'contentCheckbox';
+        let contentCheckbox = createGeneralElement('input', 'contentCheckbox', `${id}-checkbox`, '', 'checkbox');
         contentCheckbox.checked = eleContent.checked;
-        contentCheckbox.setAttribute("id", `${id}-checkbox`);
-        contentCheckbox.setAttribute("type", "checkbox");
         contentCheckbox.onchange = () => toggleCheckbox(id);
 
-        let contentCheckboxLabel = document.createElement('label');
+        let contentCheckboxLabel = createGeneralElement('label', 'contentCheckboxLabel', `${id}-contentCheckboxLabel`);
         contentCheckboxLabel.setAttribute("for", "contentCheckbox");
-        contentCheckboxLabel.className="contentCheckboxLabel";
-        contentCheckboxLabel.setAttribute("id", `${id}-contentCheckboxLabel`);
-
+        
         let contentCheckboxSpan = document.createElement('span');
 
         contentCheckboxLabel.appendChild(contentCheckbox);
         contentCheckboxLabel.appendChild(contentCheckboxSpan);
         
-        let contentDate = document.createElement('div');
-        contentDate.className = 'contentDate';
-        contentDate.setAttribute("id", `${id}-date`);
-        contentDate.innerHTML = eleContent.type ;
-
+        let contentDate = createGeneralElement('div', 'contentDate', `${id}-date`, eleContent.type );
+        
         let content = null;
         if (eleContent.type === 'code') {
           content = createCodeBlockElement(eleContent);
         } else if (eleContent.type === 'link') {
           content = createTitleLinkElement(ele.title, ele.url);
         } else {
-          content = createGeneralElement(eleContent, markdownStyleEnum[eleContent.type]);
+          content = createGeneralMarkdownElement(eleContent, markdownStyleEnum[eleContent.type]);
         } 
         content.setAttribute("id", id);
-
-        let deleteBtn = document.createElement('div');
-        deleteBtn.className = className = "fa fa-trash deleteBtn";
-        deleteBtn.setAttribute("id", `${id}-deleteBtn`);
-        deleteBtn.style = "font-size:22px";
+        
+        let deleteBtn = createGeneralElement('div', 'fa fa-trash deleteBtn', `${id}-deleteBtn`);
         deleteBtn.onclick = () => clearItem(id);
         
-        let copyBtn = document.createElement('div');
-        copyBtn.className = className = "fa fa-copy copyBtn";
-        copyBtn.setAttribute("id", `${id}-copyBtn`);
-        copyBtn.style = "font-size:22px";
+        let copyBtn = createGeneralElement('div', 'fa fa-copy copyBtn', `${id}-copyBtn`);
         copyBtn.onclick = () => copyItem(id);
 
         contentContainer.appendChild(contentCheckboxLabel);
@@ -156,22 +131,18 @@ setting: {
 }
  */
 
-function toggleCheckbox(id){  
-  chrome.storage.sync.get("test9",function(items) {
+const toggleCheckbox = id => {  
+  chrome.storage.sync.get("test9", function(items) {
     let data = items['test9'];
     for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].contents.length; j++) {
-        if (data[i].contents[j].id === id) {
-          data[i].contents[j].checked = !data[i].contents[j].checked; 
-        }
-      }  
+      let index = data[i].contents.findIndex(content => content.id === id);
+      data[i].contents[index].checked = !data[i].contents[index].checked;
     }
-           
     chrome.storage.sync.set({'test9':data},function() {});
   });
-}
+};
 
-function controlContent(id) {
+const controlContent = id => {
   let contentContainer = document.getElementById(id);
   let arrow = document.getElementById(`${id}-arrow`);
   
@@ -184,49 +155,54 @@ function controlContent(id) {
   }
 }
 
-function createCustomizedElement(type, className, value, id, href, onClickCallback, onChangeCallback) {
-  let content = document.createElement(type);
+
+const createGeneralElement = (
+  eleType = 'div', 
+  className = '', 
+  id = '', 
+  innerHTML = '',
+  type = '', 
+  value = ''
+) => {
+  let content = document.createElement(eleType);
   content.className = className;
-  content.value = value;
-  content.href = href;
+  content.innerHTML = innerHTML;
   content.setAttribute("id", id);
-  content.onclick = onClickCallback;
-  content.onchange = onChangeCallback;
+  if (eleType === 'input') {
+    content.setAttribute("type", type);
+  }
   return content;
-}
+};
 
-
-function createGeneralElement(eleContent, style) {
+const createGeneralMarkdownElement = (eleContent, style) => {
   let content = document.createElement('textarea');
   content.className = 'content';
   content.value = `${style} ${eleContent.text}`;
   return content;
-}
+};
 
-function createTitleLinkElement(title, url) {
+const createTitleLinkElement = (title, url) => {
   let content = document.createElement('textarea');
   content.className = 'content';
   content.value = `[${title}](${url})`;
-
   return content;
-}
+};
 
-function createCodeBlockElement(eleContent) {
+const createCodeBlockElement = eleContent => {
   let content = document.createElement('textarea');
   content.className = 'content'
   content.value = '```';
   content.value = content.value + '\r\n' + eleContent.text + '\r\n';
   content.value = content.value + '```';
   return content;
-}
+};
 
-function getHash(key) {
-  const hash = Array.from(key).reduce(
-     (hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0)),0,);
-     return hash;
-}
+const getHash = key => {
+  return Array.from(key).reduce(
+      (hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0)),0,);
+};
 
-function clearItem(id) {
+const clearItem = id => {
   let snackbar = document.getElementById("snackbar");
   snackbar.className = "show";
   snackbar.innerHTML = `remove the text`;
@@ -262,13 +238,17 @@ function clearItem(id) {
     data = data.filter(ele => ele.contents.length !== 0);
     chrome.storage.sync.set({'test9':data},function() {});
   });
-}
+};
 
-function clear() {
-  let x = document.getElementById("snackbar");
-  x.className = "show";
-  x.innerHTML = `Remove all...`;
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+const createWarningMsg = (content, time) => {
+  let x = document.getElementById('snackbar');
+  x.className = 'show';
+  x.innerHTML = content;
+  setTimeout(function(){ x.className = x.className.replace('show', ''); }, time);
+};
+
+const clear = () => {
+  createWarningMsg('Remove all...', 3000)
   chrome.storage.sync.remove("test9",function() {
     var error = chrome.runtime.lastError;
     if (error) {
@@ -289,9 +269,9 @@ function clear() {
         }
     }
   });
-}
+};
 
-function selectAll(){
+const selectAll = () => {
   checkboxs.map(id => {
     let checkbox = document.getElementById(`${id}-checkbox`);
     checkbox.checked = true;
@@ -306,9 +286,9 @@ function selectAll(){
            
     chrome.storage.sync.set({'test9':data},function() {});
   });
-}
+};
 
-function unselectAll(){
+const unselectAll = () => {
   checkboxs.map(id => {
     let checkbox = document.getElementById(`${id}-checkbox`);
     checkbox.checked = false;
@@ -323,26 +303,18 @@ function unselectAll(){
            
     chrome.storage.sync.set({'test9':data},function() {});
   });
-}
+};
 
-function copyItem(id) {
-  let snackbar = document.getElementById("snackbar");
-  snackbar.className = "show";
-  snackbar.innerHTML = "Copied the text";
-  setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
-
+const copyItem = id => {
+  createWarningMsg('Copied the text', 3000)
   let copyText = document.getElementById(id);
   copyText.select();
   copyText.setSelectionRange(0, 99999); /*For mobile devices*/
   document.execCommand("copy");
-}
+};
 
-function copyAll() {
-  let x = document.getElementById("snackbar");
-  x.className = "show";
-  x.innerHTML = "Copied all";
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
+const copyAll = () => {
+  createWarningMsg('Copied all', 3000)
   let noteArea = document.getElementById("noteArea")
   checkboxs.map(id => {
     let checkbox = document.getElementById(`${id}-checkbox`);
@@ -356,12 +328,12 @@ function copyAll() {
   noteArea.setSelectionRange(0, 99999); /*For mobile devices*/
   document.execCommand("copy");
   noteArea.style.display = 'none'
-}
+};
 
-function openTab(tabName) {
+const openTab = tabName => {
   let x = document.getElementsByClassName("tab");
   for (let i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
   }
   document.getElementById(tabName).style.display = "block";  
-}
+};

@@ -1,5 +1,5 @@
 let idMap = {}
-function createElementsFromLocalStorage(info, tab, type){
+const createElementsFromLocalStorage = (info, tab, type) => {
     chrome.storage.sync.get('test9',function(items) {
         let list = items['test9'];
         let newTitle = tab.title;
@@ -50,49 +50,48 @@ function createElementsFromLocalStorage(info, tab, type){
             });	
         });
     });
-}
+};
 
-function referenceClick(info, tab) {
+const referenceClick = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'link');
-}
+};
 
-function h1Click(info, tab) {
+const h1Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H1');
-}
+};
 
-function h2Click(info, tab) {
+const h2Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H2');
-}
+};
 
-function h3Click(info, tab) {
+const h3Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H3');
-}
+};
 
-function h4Click(info, tab) {
+const h4Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H4');
-}
+};
 
-function h5Click(info, tab) {
+const h5Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H5');
-}
+};
 
-function h6Click(info, tab) {
+const h6Click = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'H6');
-}
+};
 
-function refClick(info, tab) {
+const refClick = (info, tab) => {
     createElementsFromLocalStorage(info, tab, 'ref');
-}
+};
 
-function singleLineCodeClick(info, tab) {
+const singleLineCodeClick = (info, tab) => {
    createElementsFromLocalStorage(info, tab, 'code');
-}
+};
 
-function getHash(key) {
-    const hash = Array.from(key).reduce(
-       (hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0)),0,);
-       return hash;
-}
+const getHash = key => {
+    return Array.from(key).reduce(
+        (hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0)),0,);
+};
 
 chrome.runtime.onInstalled.addListener(function() {
     let parent = chrome.contextMenus.create({

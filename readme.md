@@ -1,4 +1,4 @@
-# A-Layman Blogger Helper - Markdown Clipboard
+# Blogger Helper - Markdown Clipboard Chrome Extension
 
 ## Introduction
 People who work as developers or bloggers usually open a lot of Chrome tabs to collect information or references and turn them into markdown syntax. 

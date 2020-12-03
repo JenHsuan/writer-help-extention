@@ -10,6 +10,11 @@ body {
     overflow-y: scroll;
     background-color: gray;
   }
+
+  .arrowContainer {
+    font-size: 16px;
+  }
+
   #noteArea{
     width: 4px; 
     height: 4px; 
@@ -169,6 +174,7 @@ body {
     grid-column-end: 12;
     text-align: center;
     cursor: pointer;
+    font-size:22px;
   }
 
   .copyBtn {
@@ -181,6 +187,7 @@ body {
     grid-column-end: 11;
     text-align: center;
     cursor: pointer;
+    font-size:22px;
   }
 
   .content::before { 
