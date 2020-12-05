@@ -320,7 +320,7 @@ const copyAll = () => {
     let checkbox = document.getElementById(`${id}-checkbox`);
     if (checkbox.checked) {
       let content = document.getElementById(id);
-      noteArea.value = noteArea.value + "* " +  content.value + '\r\n'; 
+      noteArea.value = content.value + '\r\n'; 
     }
   })
   noteArea.style.display = 'block'
