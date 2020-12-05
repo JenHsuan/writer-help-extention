@@ -4,7 +4,6 @@
   "author": "Jen-Hsuan Hsieh",
   "description": "The plugin can improve the productivity and reduce the time to edit markdown syntax.",
   "permissions": [
-    "tabs",
     "contextMenus",
     "storage"
   ],
